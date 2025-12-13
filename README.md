@@ -26,7 +26,7 @@ My development environment bridges Windows hardware with Linux software capabili
 
 ## Development Log
 
-### [Day 1: Setup & Troubleshooting](./logs/Day1_Setup.md)**
+### [Day 1: Setup & Troubleshooting](./log/DevLog_1.md)
 **Focus**: Environment Initialization & Connectivity
 
 * **USB Connection**: Encountered connectivity drops.
