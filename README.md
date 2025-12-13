@@ -26,13 +26,8 @@ My development environment bridges Windows hardware with Linux software capabili
 
 ## Development Log
 
-### [Day 1: Setup & Troubleshooting](./log/DevLog_1.md)
-**Focus**: Environment Initialization & Connectivity
-
-* **USB Connection**: Encountered connectivity drops.
-    * *Solution*: Diagnosed and replaced a faulty USB-C cable. High-quality data cables are essential for stable serial communication.
-* **WSL Integration**: Configured USB Passthrough.
-    * Successfully installed and configured `usbipd-win` to bridge the Waveshare adapter to the Ubuntu instance.
+### [Day 1: Actuator Configuration & WSL Setu](./log/DevLog_1.md)
+Successfully configured the full 12-motor set for both Leader and Follower arms. Key technical achievements included resolving WSL2 USB isolation issues via usbipd-win and fixing serial port permission (chmod) conflicts to enable reliable motor communication.
 
 ---
 
