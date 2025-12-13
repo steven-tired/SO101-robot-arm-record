@@ -53,6 +53,6 @@ Hardware Visuals
         
     *   Configuration jumpers were verified in Mode B (USB -> SERVO).
         
-2.  **The "Muscles": Configured Motors**
+2.  **The "Muscles": Configured Motors** ![link](../image/Configured Motors.jpg)
     
     *   All 12 motors are now configured with unique IDs and labeled (Shoulder, Elbow, Wrist, Gripper) for both Leader and Follower arms.
