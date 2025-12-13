@@ -1,16 +1,42 @@
-LeRobot SO-100/101 Robot Arm Build Journey
-🚧 Status: In Progress (Assembling & Configuring)
+# LeRobot SO-100/101 Robot Arm Build Journey
 
-This repository documents the process of assembling, configuring, and collecting data with the SO-101 Robot Arm using the Hugging Face LeRobot framework.
+![Status](https://img.shields.io/badge/Status-In%20Progress-yellow)
+![Robot](https://img.shields.io/badge/Hardware-SO--101-blue)
+![Stack](https://img.shields.io/badge/Tech-WSL2%20%7C%20Python-green)
 
-🛠️ Hardware & Tech Stack
-Robot Arm: SO-101 (6-DOF with Bus Servos)
+> **Current Status**: Assembling & Configuring
 
-Actuators: Feetech STS3215
+This repository documents the step-by-step process of assembling, configuring, and collecting data with the **SO-101 Robot Arm**, utilizing the [Hugging Face LeRobot](https://github.com/huggingface/lerobot) framework.
 
-Environment: Windows 11 + WSL 2 (Ubuntu) + Miniconda
+---
 
-Key Tools: usbipd-win (for USB passthrough), Python 3.10
+## Tech Stack & Environment
 
-📅 Development Log
-Day 1: Setup & Troubleshooting - Solved USB cable quality issues and configured WSL USB passthrough with usbipd.
+My development environment bridges Windows hardware with Linux software capabilities.
+
+* **Host OS**: Windows 11
+* **Virtualization**: WSL 2 (Ubuntu 22.04)
+* **Package Manager**: Miniconda
+* **Language**: Python 3.10
+* **Key Tooling**:
+    * `usbipd-win` (Crucial for passing USB devices from Windows to WSL)
+    * `LeRobot` Python Library
+
+---
+
+## Development Log
+
+### [Day 1: Setup & Troubleshooting](./logs/Day1_Setup.md)**
+**Focus**: Environment Initialization & Connectivity
+
+* **USB Connection**: Encountered connectivity drops.
+    * *Solution*: Diagnosed and replaced a faulty USB-C cable. High-quality data cables are essential for stable serial communication.
+* **WSL Integration**: Configured USB Passthrough.
+    * Successfully installed and configured `usbipd-win` to bridge the Waveshare adapter to the Ubuntu instance.
+
+---
+
+## References
+https://huggingface.co/docs/lerobot/so101?example=Linux
+
+https://github.com/TheRobotStudio/SO-ARM100
