@@ -33,7 +33,8 @@ Successfully configured the full 12-motor set for both Leader and Follower arms.
 Addressed the removal of the "Auto-Zero" feature in the latest LeRobot stack by developing a custom "Bare Metal" Python script to bypass high-level abstractions and force motors to neutral (`2048`). Diagnosed intermittent communication failures ("Zombie Motor" phenomenon) caused by voltage drops in the 5V daisy chain. Successfully performed mechanical extraction of seized connectors to enable reconfiguration.
 
 ### [Day 3: Low-Voltage Workarounds & Raw Serial Zeroing](./log/DevLog_3.md)
-Successfully zeroed all 6 STS3215 motors using a 5V power supply by bypassing the official LeRobot library's voltage safety checks. Developed a custom "Raw Serial" Python script utilizing a sequential "pulse-and-relax" strategy to prevent power supply brown-outs during calibration. Additionally identified a hardware strain relief defect and mitigated the risk by assigning the compromised unit to the stationary Base (ID 1).
+Successfully zeroed all 6 STS3215 motors using a 5V power supply by bypassing the official LeRobot library's voltage safety checks. Developed a custom "Raw Serial" Python script utilizing a sequential "pulse-and-relax" strategy to prevent power supply brown-outs during calibration. 
+
 ---
 
 ## References
