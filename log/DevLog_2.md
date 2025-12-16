@@ -46,10 +46,4 @@ for motor_id in target_ids:
     bus.write("Torque_Enable", motor_id, 1)
     bus.write("Goal_Position", motor_id, 2048)
 ```
-## Next Actions:
 
-* 1.Voltage Injection: Connect to 7.5V Bench Power Supply to resolve communication dropouts.
-
-* 2.Verification: Run single_motor_zero.py to confirm voltage reading > 7V.
-
-* 3.Assembly: Install servo horns only after confirming Present_Position ~= 2048 to minimize software offsets.
