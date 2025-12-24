@@ -34,7 +34,7 @@ Addressed the removal of the "Auto-Zero" feature in the latest LeRobot stack by 
 (after the assembly, 5v charger seems to be enough to drive the robot arm. The reason why motor fails to response at day 2 remains unknown.)
 
 ### [Day 3: Low-Voltage Workarounds & Raw Serial Zeroing](./log/DevLog_3.md)
-Successfully zeroed all 6 STS3215 motors using a 5V power supply by bypassing the official LeRobot library's voltage safety checks. Developed a custom "Raw Serial" Python script utilizing a sequential "pulse-and-relax" strategy to prevent power supply brown-outs during calibration. 
+Successfully zeroed all 6 STS3215 motors using a 5V power supply by bypassing the official LeRobot library's voltage safety checks. Developed a custom "Raw Serial" Python script utilizing a sequential "pulse-and-relax" strategy to zero the motor one by one in sequence. 
 
 ### [Day 4: Assembly, Calibration Anomalies & Motion Verification](./log/DevLog_4.md)
 Completed the physical assembly and resolved serial bus communication failures caused by OS permission restrictions and USB latch-ups. Corrected a "folded-state" calibration error by manually re-aligning homing offsets to a physical L-shape neutral pose, ensuring software-to-hardware geometric alignment. Verified safe multi-joint actuation across all axes using a custom normalized coordinate script (`move_test.py`) to confirm mechanical integrity before kinematic integration.
