@@ -67,3 +67,6 @@ time.sleep(1)
 bus.write("Goal_Position", "elbow_flex", -50)    # Verify Elbow Direction
 time.sleep(0.5)
 bus.write("Goal_Position", "gripper", 20)        # Verify Gripper Opening
+```
+[[video]]
+https://github.com/steven-tired/SO101-robot-arm-record/blob/main/log/image/move_test.mp4
