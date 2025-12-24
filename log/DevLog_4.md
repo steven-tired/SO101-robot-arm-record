@@ -42,31 +42,60 @@ Completed the physical assembly of the SO-100 robotic arm. The process revealed 
 This snippet demonstrates manually loading the calibration profile to allow safe, normalized motor control without the overhead of the full LeRobot control stack.
 
 ```python
-# move_test.py (Snippet)
 import json
 import time
 from lerobot.motors.feetech import FeetechMotorsBus
-from lerobot.motors.motors_bus import MotorCalibration
+from lerobot.motors.motors_bus import Motor, MotorNormMode, MotorCalibration
 
-# Load and parse calibration data manually
+calib_path = "/home/steven/.cache/huggingface/lerobot/calibration/robots/so101_follower/my_follower_arm.json"
+
 with open(calib_path, "r") as f:
     raw_calib_data = json.load(f)
 
 calibration_objects = {}
 for motor_name, data in raw_calib_data.items():
+    
     calibration_objects[motor_name] = MotorCalibration(**data)
+    
+norm_mode = MotorNormMode.RANGE_M100_100
 
-# Connect to bus
-bus = FeetechMotorsBus(port="/dev/ttyACM0", motors=motors_config, calibration=calibration_objects)
-bus.connect()
+motors_config = {
+    "shoulder_pan": Motor(1, "sts3215", norm_mode),
+    "shoulder_lift": Motor(2, "sts3215", norm_mode),
+    "elbow_flex": Motor(3, "sts3215", norm_mode),
+    "wrist_flex": Motor(4, "sts3215", norm_mode),
+    "wrist_roll": Motor(5, "sts3215", norm_mode),
+    "gripper": Motor(6, "sts3215", MotorNormMode.RANGE_0_100),
+}
 
-# Execute Verification Sequence
-print("Starting Joint Verification...")
-bus.write("Goal_Position", "shoulder_pan", 45)   # Verify Base Rotation
-time.sleep(1)
-bus.write("Goal_Position", "elbow_flex", -50)    # Verify Elbow Direction
-time.sleep(0.5)
-bus.write("Goal_Position", "gripper", 20)        # Verify Gripper Opening
+bus = FeetechMotorsBus(
+    port="/dev/ttyACM0", 
+    motors=motors_config,
+    calibration=calibration_objects 
+)
+
+try:
+    bus.connect()
+    bus.write("Goal_Position", "gripper", 0)
+    bus.write("Goal_Position", "wrist_roll", 50)
+    bus.write("Goal_Position", "shoulder_lift", -10)
+    bus.write("Goal_Position", "elbow_flex",-20)
+    time.sleep(1)
+    bus.write("Goal_Position", "wrist_flex", 73)
+    bus.write("Goal_Position", "wrist_roll", 0)
+    bus.write("Goal_Position", "shoulder_pan", 0)
+    bus.write("Goal_Position", "shoulder_lift", -90)
+    bus.write("Goal_Position", "elbow_flex",50)
+    time.sleep(1.5)
+
+except Exception as e:
+   
+    if 'calibration_objects' in locals():
+        print(f"sample: {list(calibration_objects.values())[0]}")
+
+finally:
+    bus.disconnect()
+    print("disconnect")
 ```
 
 
