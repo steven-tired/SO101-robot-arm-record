@@ -1,3 +1,4 @@
+
 # DevLog Day 5: Refining the Kinematics Mode & Script Optimization
 
 ## 1. Overview
@@ -5,10 +6,10 @@ Today was focused on bridging the gap between the **Inverse Kinematics (IK)** ma
 
 ## 2. Key Challenges & Solutions
 
-### The "Offset" Problem (Mathematical vs. Physical Zero)
-* **Issue**: The IK solver (using `ikpy`) identified "straight ahead" as **-33°**, while the physical motor calibration expected **0°** at that position.
-* **Solution**: Implemented a software-level `OFFSET` dictionary. By applying a `+33` correction to the `shoulder_pan`, the software now aligns perfectly with the physical world.
-* **Direction Logic**: Added a `DIRECTION_CORRECTION` toggle to handle cases where the motor’s internal direction is inverted relative to the URDF model.
+### A. The "Offset" Problem (Mathematical vs. Physical Zero)
+* **Issue**: The IK solver (using `ikpy`) identified "straight ahead" as **-33°**, while the physical motor calibration expected **0°** at that position. This discrepancy stemmed from the default joint definitions in the URDF model downloaded online.
+* **Solution**: Modified the downloaded **URDF document** to recalibrate the joint's reference frame. By adjusting the origin and axis parameters within the URDF, the kinematic model now aligns perfectly with the physical motor's zero position.
+* **Direction Logic**: Corrected the joint rotation axes directly in the URDF file to match the actual motor behavior, ensuring the software model and physical hardware move in sync without requiring additional software-level inversion.
 
 ### The "Table Crash" Safety Fix
 * **Issue**: The initial `stow_arm()` (Home) function was set to a position that caused the arm to strike the table (`shoulder_lift: -90`).
@@ -191,4 +192,8 @@ if __name__ == "__main__":
     finally:
         if 'arm' in locals():
             try: arm.disconnect()
+
             except: pass
+```
+
+https://github.com/user-attachments/assets/725700a7-a335-4823-ad56-57af2dc79e87
