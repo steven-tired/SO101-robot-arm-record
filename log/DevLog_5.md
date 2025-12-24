@@ -197,3 +197,7 @@ if __name__ == "__main__":
 ```
 
 https://github.com/user-attachments/assets/725700a7-a335-4823-ad56-57af2dc79e87
+
+** reference
+
+https://huggingface.co/haixuantao/dora-bambot/raw/main/URDF/so101.urdf
