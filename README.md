@@ -31,9 +31,16 @@ Successfully configured the full 12-motor set for both Leader and Follower arms.
 
 ### [Day 2: Motor Zeroing & Power Diagnostics](./log/DevLog_2.md)
 Addressed the removal of the "Auto-Zero" feature in the latest LeRobot stack by developing a custom "Bare Metal" Python script to bypass high-level abstractions and force motors to neutral (`2048`). Diagnosed intermittent communication failures ("Zombie Motor" phenomenon) caused by voltage drops in the 5V daisy chain. Successfully performed mechanical extraction of seized connectors to enable reconfiguration.
+(after the assembly, 5v charger seems to be enough to drive the robot arm. The reason why motor fails to response at day 2 remains unknown.)
 
 ### [Day 3: Low-Voltage Workarounds & Raw Serial Zeroing](./log/DevLog_3.md)
 Successfully zeroed all 6 STS3215 motors using a 5V power supply by bypassing the official LeRobot library's voltage safety checks. Developed a custom "Raw Serial" Python script utilizing a sequential "pulse-and-relax" strategy to prevent power supply brown-outs during calibration. 
+
+### [Day 4: Assembly, Calibration Anomalies & Motion Verification](./log/DevLog_4.md)
+Completed the physical assembly and resolved serial bus communication failures caused by OS permission restrictions and USB latch-ups. Corrected a "folded-state" calibration error by manually re-aligning homing offsets to a physical L-shape neutral pose, ensuring software-to-hardware geometric alignment. Verified safe multi-joint actuation across all axes using a custom normalized coordinate script (`move_test.py`) to confirm mechanical integrity before kinematic integration.
+
+### [Day 5: Kinematic Refining, URDF Optimization & Coordinate Control](./log/DevLog_5.md)
+Refined Inverse Kinematics (IK) integration by transitioning from normalized motor steps to precise XYZ coordinate control. Modified the source URDF document to calibrate joint reference frames and fix a -33° shoulder offset, aligning the mathematical model with physical reality. Implemented a robust control script featuring degree-to-normalization mapping and safety stow logic to prevent mechanical collisions during testing.
 
 ---
 
