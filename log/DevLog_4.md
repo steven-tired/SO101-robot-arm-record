@@ -69,4 +69,7 @@ time.sleep(0.5)
 bus.write("Goal_Position", "gripper", 20)        # Verify Gripper Opening
 ```
 
-https://github.com/steven-tired/SO101-robot-arm-record/blob/main/log/image/move_test.mp4
+
+https://github.com/user-attachments/assets/6a5af689-eff2-4781-aeb4-9aa49643345a
+
+
