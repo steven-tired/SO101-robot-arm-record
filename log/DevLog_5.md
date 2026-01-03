@@ -1,6 +1,10 @@
 
 # DevLog Day 5: Refining the Kinematics Mode & Script Optimization, 12.23
 
+> **Date**: 2025-12-23
+> **Status**: Success (inverse kinematics script/trial)
+> **Focus**: drive the robot arm with inverse kinematics algorithm
+
 ## 1. Overview
 Today was focused on bridging the gap between the **Inverse Kinematics (IK)** mathematical model and the **physical hardware**. The primary goal was to ensure that when the script calculates a coordinate (e.g., "straight ahead"), the arm actually moves to that position without hitting the desk or over-rotating.
 
