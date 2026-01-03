@@ -71,3 +71,8 @@ Current state of the physical interface attempts:
 > ```
 >
 > **Action Item:** Re-route calibration files to match the default ID path.
+
+
+## References
+https://github.com/ycheng517/lerobot-ros?tab=readme-ov-file
+https://github.com/Pavankv92/lerobot_ws?tab=readme-ov-file#installation
