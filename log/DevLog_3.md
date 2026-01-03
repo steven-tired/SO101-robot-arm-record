@@ -1,4 +1,4 @@
-# Day 3: Low-Voltage Workarounds, Raw Serial Protocol & Auto-Zeroing. 12.14
+# Day 3: Low-Voltage Workarounds, Raw Serial Protocol & Auto-Zeroing
 
 > **Date**: 2025-12-15
 > **Status**: Success (Zeroing Complete) / Hardware Warning
