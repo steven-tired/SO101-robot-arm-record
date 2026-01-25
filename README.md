@@ -1,4 +1,4 @@
-# LeRobot SO-100/101 Robot Arm Build Journey
+# LeRobot SO-101 Robot Arm Build Journey
 
 ![Status](https://img.shields.io/badge/Status-In%20Progress-yellow)
 ![Robot](https://img.shields.io/badge/Hardware-SO--101-blue)
@@ -42,6 +42,9 @@ Completed the physical assembly and resolved serial bus communication failures c
 ### [Day 5: Kinematic Refining, URDF Optimization & Coordinate Control](./log/DevLog_5.md)
 Refined Inverse Kinematics (IK) integration by transitioning from normalized motor steps to precise XYZ coordinate control. Modified the source URDF document to calibrate joint reference frames and fix a -33° shoulder offset, aligning the mathematical model with physical reality. Implemented a robust control script featuring degree-to-normalization mapping and safety stow logic to prevent mechanical collisions during testing.
 
+### [Day 6: ROS2 Integration & Hardware-to-Simulation Gap](./log/DevLog_6.md)
+Integrated the SO-101 arm into the ROS2 ecosystem, achieving kinematic validation through Rviz simulation. Diagnosed a `StopIteration` deadlock in the teleoperation CLI caused by a logical conflict between custom calibration IDs and hardware driver mapping. Established `udev` rules to grant the ROS2 environment persistent serial permissions without compromising Conda pathing. 
+(Simulation confirmed that coordinate frame offsets are accurate, though physical control is currently limited by the software's driver-identification logic.)
 
 ### [Day 7: Multi-Arm Integration & USB Hub Topology](./log/DevLog_7.md)
 Successfully enabled simultaneous operation of both Leader and Follower arms through a single USB Hub by implementing physical port mapping (`by-path`) to resolve `CH343` identity conflicts. [cite_start]Refactored the `attach.bat` [cite: 1] [cite_start]automation script to search for `CH343` serial devices [cite: 2] [cite_start]and mount multiple devices to WSL simultaneously[cite: 7]. Resolved violent motor "glitching" and overload errors by purging stale calibration caches and performing a hardware-aligned re-calibration for the dual-arm setup. 
