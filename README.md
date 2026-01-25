@@ -42,6 +42,11 @@ Completed the physical assembly and resolved serial bus communication failures c
 ### [Day 5: Kinematic Refining, URDF Optimization & Coordinate Control](./log/DevLog_5.md)
 Refined Inverse Kinematics (IK) integration by transitioning from normalized motor steps to precise XYZ coordinate control. Modified the source URDF document to calibrate joint reference frames and fix a -33° shoulder offset, aligning the mathematical model with physical reality. Implemented a robust control script featuring degree-to-normalization mapping and safety stow logic to prevent mechanical collisions during testing.
 
+
+### [Day 7: Multi-Arm Integration & USB Hub Topology](./log/DevLog_7.md)
+Successfully enabled simultaneous operation of both Leader and Follower arms through a single USB Hub by implementing physical port mapping (`by-path`) to resolve `CH343` identity conflicts. [cite_start]Refactored the `attach.bat` [cite: 1] [cite_start]automation script to search for `CH343` serial devices [cite: 2] [cite_start]and mount multiple devices to WSL simultaneously[cite: 7]. Resolved violent motor "glitching" and overload errors by purging stale calibration caches and performing a hardware-aligned re-calibration for the dual-arm setup. 
+(Verified that independent 5V power supply for each arm is essential for stable communication; once ports were correctly mapped, teleoperation functioned without latency despite shared USB bandwidth.)
+
 ---
 
 ## References
