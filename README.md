@@ -1,14 +1,34 @@
-# LeRobot SO-101 Robot Arm Build Journey
+# LeRobot SO-101: 6-Axis Teleoperation & Imitation Learning
 
-![Status](https://img.shields.io/badge/Status-In%20Progress-yellow)
-![Robot](https://img.shields.io/badge/Hardware-SO--101-blue)
-![Stack](https://img.shields.io/badge/Tech-WSL2%20%7C%20Python-green)
+![Status](https://img.shields.io/badge/Status-Teleoperation%20Active-success)
+![Hardware](https://img.shields.io/badge/Hardware-SO--101%20%7C%20STS3215-blue)
+![Tech](https://img.shields.io/badge/Stack-WSL2%20%7C%20LeRobot-orange)
 
-> **Current Status**: Assembling & Configuring
+> **Project Goal**: Constructing a low-cost, open-source dual-arm robot system to democratize AI data collection and Imitation Learning.
 
-This repository documents the step-by-step process of assembling, configuring, and collecting data with the **SO-101 Robot Arm**, utilizing the [Hugging Face LeRobot](https://github.com/huggingface/lerobot) framework.
+This repository documents the engineering journey of the **SO-101 Robot Arm**, built on top of the [Hugging Face LeRobot](https://github.com/huggingface/lerobot) framework. It covers mechanical assembly, embedded servo configuration, and the complex software bridge required to run robotics stacks on Windows via WSL2.
 
 ---
+
+## Demo (Work in Progress)
+
+
+https://github.com/user-attachments/assets/f68c8e8b-f97f-4ace-9f6e-6af80a342441
+
+
+---
+
+## Tech Stack & Architecture
+
+My development environment is designed to bridge **Windows hardware accessibility** with **Linux robotics ecosystems**.
+
+| Component | Specification | Purpose |
+| :--- | :--- | :--- |
+| **Host OS** | Windows 11 | Driver support & Primary workstation |
+| **Runtime** | WSL 2 (Ubuntu 22.04) | ROS-compatible environment for LeRobot |
+| **Actuators** | Feetech STS3215 | Serial Bus Servos with position feedback |
+| **Middleware** | `usbipd-win` | **Crucial:** Low-latency USB passthrough to WSL |
+| **Language** | Python 3.10 (Miniconda) | Control logic & ML pipeline |
 
 ## Tech Stack & Environment
 
@@ -21,6 +41,49 @@ My development environment bridges Windows hardware with Linux software capabili
 * **Key Tooling**:
     * `usbipd-win` (Crucial for passing USB devices from Windows to WSL)
     * `LeRobot` Python Library
+---
+
+## Roadmap & Milestones
+
+- [x] **Mechanical Assembly: 3D printed parts (PLA+) & structural integration.**
+- [x] **Firmware Setup: Servo zeroing and ID conflict resolution.**
+- [x] **WSL2 Environment: Successful compilation of LeRobot dependencies.**
+- [x] **Teleoperation: Real-time Leader-Follower synchronization (Data Collection Mode).**
+- [ ] Camera Integration: Mounting wrist/overhead cameras for visual input.
+- [ ] Model Training: Training a policy using ACT (Action Chunking with Transformers).
+
+---
+## Key Engineering Challenges
+
+### 1. The "Windows-Linux" Hardware Bridge
+Running robotics hardware on Windows is notoriously difficult. I utilized `usbipd-win` to bind the Feetech servo controller (UARTHS) to the WSL2 kernel.
+
+```bash
+# Example of binding the USB device to WSL instance
+usbipd bind --busid 2-1
+usbipd attach --wsl --busid 2-1
+```
+
+### 2. Dependency Conflicts: ROS2 vs. LeRobot (Log 6)
+The LeRobot framework requires specific PyTorch CUDA bindings that conflict with the standard system-level Python environment used by ROS2.
+* **Problem:** Attempts to run LeRobot within the global ROS environment caused dependency collisions (detailed in `/logs/log6.md`).
+* **Solution:** Enforced strict environment isolation using Conda. I architected a workflow where the hardware interface runs in a dedicated environment, communicating with the planning layer via decoupled sockets.
+
+### 3. USB Hub & Physical Path Instability
+Connecting multiple serial devices via a USB hub caused dynamic enumeration issues where port paths (e.g., `/dev/ttyUSB0`) would shift randomly upon reboot.
+* **Problem:** LeRobot's configuration files expect static paths, causing initialization failures when the USB hub re-indexed devices.
+* **Solution:** Implemented `udev` rules to bind devices by their unique hardware UUIDs instead of their volatile physical bus IDs, ensuring deterministic connection paths regardless of boot order.
+
+### 4. Servo Calibration & ID Mapping
+Configured 12 independent degrees of freedom (DoF) across two arms.
+* **Leader Arm**: Hand-held teleoperation unit (Servos ID 1-6).
+* **Follower Arm**: The actuator unit executing tasks (Servos ID 1-6, mapped logically).
+* **Solution**: Wrote custom Python scripts to verify baud rates (1M) and flash EEPROM parameters for PID tuning.
+---
+
+## Acknowledgements
+
+Built upon the incredible open-source work of [The Robot Studio](https://github.com/TheRobotStudio/SO-ARM100) and the [Hugging Face LeRobot Team](https://github.com/huggingface/lerobot).
 
 ---
 
