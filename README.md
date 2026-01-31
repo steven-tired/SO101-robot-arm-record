@@ -49,7 +49,7 @@ My development environment bridges Windows hardware with Linux software capabili
 - [x] **Firmware Setup: Servo zeroing and ID conflict resolution.**
 - [x] **WSL2 Environment: Successful compilation of LeRobot dependencies.**
 - [x] **Teleoperation: Real-time Leader-Follower synchronization (Data Collection Mode).**
-- [ ] Camera Integration: Mounting wrist/overhead cameras for visual input.
+- [ ] Visual Data Pipeline: Configuring host connectivity for mounted wrist/overhead cameras to synchronize image streams for data collection.
 - [ ] Model Training: Training a policy using ACT (Action Chunking with Transformers).
 
 ---
